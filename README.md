@@ -1,4 +1,4 @@
-Sakura
+# Sakura
 ## An open-source personal cloud for your home server.
 
 ### Installation
