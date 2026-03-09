@@ -1,0 +1,9 @@
+{
+  "workspaces": [
+    "packages/web"
+  ],
+  "scripts": {
+    "dev:web": "cd packages/web && bun dev",
+    "dev:api": "go run ./packages/api"
+  }
+}
