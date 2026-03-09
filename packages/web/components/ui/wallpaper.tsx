@@ -7,6 +7,7 @@ export default function Wallpaper() {
     alt=""
     fill
     draggable={false}
+    priority={true}
     className="blur-sm opacity-80"
     />
     </div>
