@@ -28,7 +28,7 @@ func main() {
 		}
 	}
 
-	// not found middleware
+	// not found
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		json.Write(w, http.StatusNotFound, []byte(`
 			{"error": "true",
@@ -38,6 +38,7 @@ func main() {
 
 	http.HandleFunc("/setup", func(w http.ResponseWriter, r *http.Request) {
 		// this will depend on if the server is setup...
+
 	})
 
 	fmt.Println("Listening on http://localhost:8080")
