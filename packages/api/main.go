@@ -10,9 +10,9 @@ import (
 )
 
 type Response struct {
-    Error   bool   `json:"error"`
-    Message string `json:"message"`
-})
+	Error   bool   `json:"error"`
+	Message string `json:"message"`
+}
 
 func main() {
 	homeDir, err := os.UserHomeDir()
@@ -35,17 +35,17 @@ func main() {
 
 	// not found
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-    json.Write(w, http.StatusNotFound, Response{Error: true, Message: "not found"})
-})
+		json.Write(w, http.StatusNotFound, Response{Error: true, Message: "not found"})
+	})
 
 	http.HandleFunc("/server", func(w http.ResponseWriter, r *http.Request) {
-    _, err := os.Stat(homeDir + "/.sakura/config.yaml")
-    if err != nil {
-        json.Write(w, http.StatusInternalServerError, Response{Error: true, Message: "server not configured"})
-        return
-    }
-    json.Write(w, http.StatusOK, Response{Error: false, Message: "server configured"})
-})
+		_, err := os.Stat(homeDir + "/.sakura/config.yaml")
+		if err != nil {
+			json.Write(w, http.StatusInternalServerError, Response{Error: true, Message: "server not configured"})
+			return
+		}
+		json.Write(w, http.StatusOK, Response{Error: false, Message: "server configured"})
+	})
 
 	fmt.Println("Listening on http://localhost:8080")
 	if err = http.ListenAndServe(":8080", nil); err != nil {
