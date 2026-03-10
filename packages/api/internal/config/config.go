@@ -54,3 +54,11 @@ func Init(path string) error {
 
 	return os.WriteFile(path, data, 0644)
 }
+
+func Save(cfg *Config, path string) error {
+	data, err := yaml.Marshal(cfg)
+	if err != nil {
+		return err
+	}
+	return os.WriteFile(path, data, 0644)
+}
