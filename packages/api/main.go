@@ -47,6 +47,8 @@ func main() {
 		json.Write(w, http.StatusOK, Response{Error: false, Message: "server configured"})
 	})
 
+	// autoload/create routes from /routes/*/route.go
+
 	fmt.Println("Listening on http://localhost:8080")
 	if err = http.ListenAndServe(":8080", nil); err != nil {
 		fmt.Printf("Server error: %v", err)
