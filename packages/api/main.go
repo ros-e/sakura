@@ -7,6 +7,7 @@ import (
 
 	"github.com/ros-e/sakura/packages/api/internal/config"
 	"github.com/ros-e/sakura/packages/api/internal/json"
+	"github.com/ros-e/sakura/packages/api/routes/auth"
 )
 
 type Response struct {
@@ -46,9 +47,7 @@ func main() {
 		}
 		json.Write(w, http.StatusOK, Response{Error: false, Message: "server configured"})
 	})
-
-	// autoload/create routes from /routes/*/route.go
-
+	auth.AuthHandlers()
 	fmt.Println("Listening on http://localhost:8080")
 	if err = http.ListenAndServe(":8080", nil); err != nil {
 		fmt.Printf("Server error: %v", err)
