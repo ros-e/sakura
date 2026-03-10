@@ -9,6 +9,11 @@ import (
 	"github.com/ros-e/sakura/packages/api/internal/json"
 )
 
+type Response struct {
+    Error   bool   `json:"error"`
+    Message string `json:"message"`
+})
+
 func main() {
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
@@ -30,16 +35,17 @@ func main() {
 
 	// not found
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		json.Write(w, http.StatusNotFound, []byte(`
-			{"error": "true",
-			"message": "not found"}`,
-		))
-	})
+    json.Write(w, http.StatusNotFound, Response{Error: true, Message: "not found"})
+})
 
-	http.HandleFunc("/setup", func(w http.ResponseWriter, r *http.Request) {
-		// this will depend on if the server is setup...
-
-	})
+	http.HandleFunc("/server", func(w http.ResponseWriter, r *http.Request) {
+    _, err := os.Stat(homeDir + "/.sakura/config.yaml")
+    if err != nil {
+        json.Write(w, http.StatusInternalServerError, Response{Error: true, Message: "server not configured"})
+        return
+    }
+    json.Write(w, http.StatusOK, Response{Error: false, Message: "server configured"})
+})
 
 	fmt.Println("Listening on http://localhost:8080")
 	if err = http.ListenAndServe(":8080", nil); err != nil {
