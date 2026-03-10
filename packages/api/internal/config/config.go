@@ -15,9 +15,9 @@ type Config struct {
 }
 
 type Profile struct {
-	Username     string    `yaml:"username"`
-	PasswordHash string    `yaml:"passwordHash"`
-	CreatedAt    time.Time `yaml:"createdAt"`
+	Username  string    `yaml:"username"`
+	Password  string    `yaml:"passwordHash"`
+	CreatedAt time.Time `yaml:"createdAt"`
 }
 
 type Settings struct {
@@ -26,24 +26,16 @@ type Settings struct {
 
 func Default() *Config {
 	return &Config{
-		Profile: &Profile{
-			Username:  "",
-			CreatedAt: time.Now(),
-		},
 		Settings: &Settings{
-			Wallpaper: "",
+			Wallpaper: "dark_mountains.jpg",
 		},
 	}
 }
 
 func Init(path string) error {
 	cfg := &Config{
-		Profile: &Profile{
-			Username:  "",
-			CreatedAt: time.Now(),
-		},
 		Settings: &Settings{
-			Wallpaper: "",
+			Wallpaper: "dark_mountains.jpg",
 		},
 	}
 

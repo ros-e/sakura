@@ -23,7 +23,7 @@ func CreateProfile(username, password, configPath string) error {
 
 	cfg := config.Default()
 	cfg.Profile.Username = username
-	cfg.Profile.PasswordHash = string(hash)
+	cfg.Profile.Password = string(hash)
 	cfg.Profile.CreatedAt = time.Now()
 
 	return config.Save(cfg, configPath)
